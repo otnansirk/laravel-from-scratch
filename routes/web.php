@@ -17,9 +17,10 @@
 // Route::get('/about/{name}/{id}', function($name, $id){
 //     return 'my nane '.$name. 'with an id '. $id;
 // });
+// Route::get('/hello', function(){
+//     return "hello";
+// });
 
 Route::get('/', 'PagesController@index');
-
-Route::get('/hello', function(){
-    return "hello";
-});
+Route::get('/about', 'PagesController@about');
+Route::get('/services', 'PagesController@services');
