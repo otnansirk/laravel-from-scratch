@@ -9,6 +9,16 @@ class PostController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -73,7 +83,10 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('pages.edit')->with('post', $post);
+        if($post->user_id == auth()->user()->id){
+            return view('pages.edit')->with('post', $post);
+        }
+        return redirect('/posts')->with('error', 'No access');
     }
 
     /**
@@ -110,8 +123,10 @@ class PostController extends Controller
     {
         // create data
         $post = Post::find($id);
+        if($post->user_id !== auth()->user()->id){
+            return redirect('/posts')->with('error', 'No access');
+        }
         $post->delete();
-
         return redirect('/posts')->with('success', 'Post deleted');
     }
 }

@@ -23,7 +23,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                         </a>
                                     </div>
-                                    <small class="text-muted">{{$post->created_at}}</small>
+                                    <small class="text-muted">{{$post->created_at}} by {{$post->user->name}}</small>
                                   </div>
                             </div>
                           </div>
@@ -31,7 +31,7 @@
                     @endforeach
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="mx-auto justify-content-center">
                         {{$posts->links()}}
                     </div>
                 </div>

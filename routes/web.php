@@ -26,8 +26,6 @@ Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
 Route::resource('posts', 'PostController');
-Route::get('/posts/{id}/edit', 'PostController@edit')->middleware('auth');
-Route::post('/posts', 'PostController@store')->middleware('auth');
 
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

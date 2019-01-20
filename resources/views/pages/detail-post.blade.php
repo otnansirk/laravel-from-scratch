@@ -16,8 +16,9 @@
             <h2 class="jumbotron-heading text-secondary">Not found posts</h2>
         </section>
     @endif
-    @guest
-        @else
-        <a href="/posts/{{$post->id}}/edit" class="btn btn-outline-success">Edit</a>
+    @if(!Auth::guest())
+        @if(Auth::user()->id == $post->user_id)
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-outline-success">Edit</a>
+        @endif
     @endguest
 @endsection
