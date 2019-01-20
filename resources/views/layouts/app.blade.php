@@ -1,17 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'App') }}</title>
-    </head>
-    <body>
-        @include('inc.navbar')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    @include('inc.navbar')
+    @include('inc.messages')
+
+    <main role="main">
         <div class="container">
-            <div><br></div>
             @yield('content')
         </div>
-    </body>
+    </main>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- ckeditor -->
+        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace( 'article-ckeditor' );
+        </script>
+
+        <!-- auto load modal bootstrap -->
+        <script type="text/javascript">
+            $(window).on('load',function(){
+                $('#myModal').modal('show');
+                setTimeout(function(){
+                    $('#myModal').modal('hide');
+                }, 800);
+            });
+        </script>
+</body>
 </html>
