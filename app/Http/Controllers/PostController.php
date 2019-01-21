@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -49,14 +50,32 @@ class PostController extends Controller
     {
         $validateData = $request->validate([
             'title' => 'required|unique:posts|max:255',
-            'body'  => 'required'
+            'body'  => 'required',
+            'thumbnail' => 'image|nullable|max:1999'
         ]);
+
+        // file upload
+        if ($request->hasFile('thumbnail')) {
+            // get file with extension
+            $fileWithExt = $request->file('thumbnail')->getClientOriginalName();
+            // get just file name
+            $fileName = pathinfo($fileWithExt, PATHINFO_FILENAME);
+            // get just file extension
+            $fileExt = $request->file('thumbnail')->getClientOriginalExtension();
+            // file to store
+            $fileToStore = $fileName.'_'.time().'.'.$fileExt;
+            // upload file
+            $path = $request->file('thumbnail')->storeAs('public/thumbnail', $fileToStore);
+        } else {
+            $fileToStore = 'noThumbnail.PNG';
+        }
 
         // create data
         $post = new Post();
         $post->title   = $request->input('title');
         $post->body    = $request->input('body');
         $post->user_id = auth()->user()->id;
+        $post->thumbnail = $fileToStore;
         $post->save();
 
         return redirect('/posts')->with('success', 'Post created');
@@ -103,10 +122,27 @@ class PostController extends Controller
             'body'  => 'required'
         ]);
 
+        // file upload
+        if ($request->hasFile('thumbnail')) {
+            // get file with extension
+            $fileWithExt = $request->file('thumbnail')->getClientOriginalName();
+            // get just file name
+            $fileName = pathinfo($fileWithExt, PATHINFO_FILENAME);
+            // get just file extension
+            $fileExt = $request->file('thumbnail')->getClientOriginalExtension();
+            // file to store
+            $fileToStore = $fileName.'_'.time().'.'.$fileExt;
+            // upload file
+            $path = $request->file('thumbnail')->storeAs('public/thumbnail', $fileToStore);
+        }
+
         // create data
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body  = $request->input('body');
+        if ($request->hasFile('thumbnail')) {
+            $post->thumbnail = $fileToStore;
+        }
         $post->save();
 
         return redirect('/posts')->with('success', 'Post updated');
@@ -125,6 +161,10 @@ class PostController extends Controller
         $post = Post::find($id);
         if($post->user_id !== auth()->user()->id){
             return redirect('/posts')->with('error', 'No access');
+        }
+
+        if ($post->thumbnail !== 'noThumbnail.PNG') {
+            Storage::delete('public/thumbnail/'.$post->thumbnail);
         }
         $post->delete();
         return redirect('/posts')->with('success', 'Post deleted');

@@ -7,7 +7,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <h2>Edit Post</h2>
-        {!! Form::open(['action' => ['PostController@update', $post->id], 'method' => 'POST']) !!}
+        {!! Form::open(['action' => ['PostController@update', $post->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             {{ Form::submit('Save post', ['class' => 'btn btn-primary float-sm-right']) }}
             <br>
             <div class="form-group">
@@ -19,6 +19,11 @@
             <div class="form-group">
                 {{ Form::label('body', 'Body text') }}
                 {{ Form::textarea('body', $post->body, ['class' => 'form-control', 'placeholder' => 'Body text', 'id' => 'article-ckeditor']) }}
+                <div class="" style="color : red">{{$errors->first('body')}}</div>
+            </div>
+            <div class="form-group">
+                {{ Form::label('thumbnail', 'Thumbnail') }}
+                {{ Form::file('thumbnail', ['class' => 'form-control', 'placeholder' => 'Body text', 'id' => 'article-ckeditor']) }}
                 <div class="" style="color : red">{{$errors->first('body')}}</div>
             </div>
         {{Form::hidden('_method', 'PUT')}}

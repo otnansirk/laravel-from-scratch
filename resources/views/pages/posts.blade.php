@@ -9,8 +9,9 @@
                     @foreach($posts as $post)
                         <div class="col-md-4">
                           <div class="card mb-4 shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"/>
-                                <text fill="#eceeef" dy=".3em" x="50%" y="50%"></text>
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+                                <embed src="/storage/thumbnail/{{$post->thumbnail}}" width="100%" height="223em">
+                                
                             </svg>
                             <div class="card-body">
                                 <a href="/posts/{{$post->id}}"> <h4>{{$post->title}}</h4> </a>
