@@ -5,33 +5,25 @@
 
         <div class="album py-5 bg-white">
             <div class="container">
-                <div class="row">
-                    @foreach($posts as $post)
-                        <div class="col-md-4">
-                          <div class="card mb-4 shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                                <embed src="/storage/thumbnail/{{$post->thumbnail}}" width="100%" height="223em">
-                                
-                            </svg>
-                            <div class="card-body">
-                                <a href="/posts/{{$post->id}}"> <h4>{{$post->title}}</h4> </a>
-                                <p class="card-text">
-                                    {!!str_limit($post->body, $limit = 55, $end = ' ...')!!}
-                                </p>
-                                  <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a href="/posts/{{$post->id}}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        </a>
-                                    </div>
-                                    <small class="text-muted">{{$post->created_at}} by {{$post->user->name}}</small>
-                                  </div>
-                            </div>
-                          </div>
+
+                @foreach($posts as $post)
+                    <div class="mb-5 row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <a href="#">
+                            <img class="img-thumbnail mb-3 mb-md-0" src="/storage/thumbnail/{{$post->thumbnail}}" alt="">
+                          </a>
                         </div>
-                    @endforeach
-                </div>
-                <div class="row">
+                        <div class="col-md-8">
+                          <a href="/posts/{{$post->id}}"> <h3>{{$post->title}}</h3> </a>
+                          <p>{!!str_limit($post->body, $limit = 55, $end = ' ...')!!}</p>
+                          <p><small class="text-muted">{{$post->created_at}} by {{$post->user->name}}</small></p>
+                          <a class="btn btn-primary" href="/posts/{{$post->id}}">View</a>
+                        </div>
+                    </div>
+                @endforeach
+
+                <div class="mt-5 row">
                     <div class="mx-auto justify-content-center">
                         {{$posts->links()}}
                     </div>

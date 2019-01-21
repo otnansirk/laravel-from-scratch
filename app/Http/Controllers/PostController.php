@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class PostController extends Controller
 {
 
+
+    protected $tr;
     /**
      * Create a new controller instance.
      *
@@ -17,16 +21,31 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->tr = new GoogleTranslate();
+    }
+
+    public function tr($lang, $word)
+    {
+        return $this->tr->setSource()->setTarget($lang)->translate($word);
+    }
+
+    public function lang()
+    {
+        return session('lang');
     }
 
     /**
      * Display a listing of the resource.
-     *
+     *auth()->user()->lang
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $posts =  Post::orderBy('created_at', 'desc')->paginate(6);
+        $posts =  Post::paginate(5);
+        foreach ($posts as $key => $post) {
+            $post->title = $this->tr($this->lang(), $post->title);
+            $post->body  = $this->tr($this->lang(), $post->body);
+        }
         return view('pages.posts')->with("posts", $posts);
     }
 
@@ -90,6 +109,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        $post->body = $this->tr($this->lang(), $post->body);
+        $post->title = $this->tr($this->lang(), $post->title);
         return view('pages.detail-post')->with('post', $post);
     }
 

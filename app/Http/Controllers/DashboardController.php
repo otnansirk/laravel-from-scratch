@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\PostController;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -24,9 +25,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $post = (new PostController());
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $r = $user->posts()->paginate(1);
-        return view('dashboard')->with('posts', $r);
+        $data = $user->posts()->paginate(5);
+
+        foreach ($data as $item) {
+            $item->title = $post->tr($post->lang(), $item->title);
+            $item->body  = $post->tr($post->lang(), $item->body);
+        }
+        return view('dashboard')->with('posts', $data);
     }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
   <a class="navbar-brand" href="/">{{ config('app.name')}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -20,6 +20,16 @@
       </li>
     </ul>
     <ul class="navbar-nav navbar-left">
+          <li class="nav-item dropdown mr-sm-2">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  language <span class="caret"></span>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a href="/lang/in" class="dropdown-item">Indonesia</a>
+                  <a href="/lang/en" class="dropdown-item">English</a>
+              </div>
+          </li>
       @guest
           <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -30,7 +40,7 @@
               </li>
           @endif
       @else
-          <li class="nav-item dropdown mr-sm-2">
+           <li class="nav-item dropdown mr-sm-2">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                   {{ Auth::user()->name }} <span class="caret"></span>
               </a>
@@ -51,9 +61,10 @@
           </li>
       @endguest
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success " type="submit">Search</button>
-    </form>
+    </form> -->
   </div>
 </nav>
+<br>

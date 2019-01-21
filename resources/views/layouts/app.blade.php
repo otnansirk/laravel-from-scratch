@@ -19,17 +19,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style = "background : white">
 
     @include('inc.navbar')
     @include('inc.messages')
 
-    <main role="main">
-        <div class="container">
+    <main  role="main" class="container">
             @yield('content')
-        </div>
     </main>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <footer class="text-muted fixed-bottom">
+      <div class="container">
+        <p>App &copy; k-15 2019</p>
+      </div>
+    </footer>
+
+
+         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <!-- ckeditor -->
         <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
         <script>

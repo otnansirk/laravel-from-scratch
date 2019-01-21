@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
@@ -25,5 +28,11 @@ class PagesController extends Controller
             'services' => ['Web', 'Design', 'SEO']
         ];
         return view('pages.services')->with($data);
+    }
+
+    public function lang($lang)
+    {
+        Session::put('lang', $lang);
+        return Redirect::back()->with('message','Operation Successful !');
     }
 }
