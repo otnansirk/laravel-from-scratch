@@ -22,15 +22,23 @@
                 <div class="" style="color : red">{{$errors->first('body')}}</div>
             </div>
             <div class="form-group">
-                {{ Form::label('thumbnail', 'Thumbnail') }}
-                {{ Form::file('thumbnail', ['class' => 'form-control', 'placeholder' => 'Body text', 'id' => 'article-ckeditor']) }}
+                {{ Form::label('thumbnail', 'Thumbnail') }}<br>
+                <img class="img-thumbnail " src="/storage/thumbnail/{{$post->thumbnail}}" alt="{{$post->thumbnail}}" style="width: 150px;"><br>
+                {{ Form::file('thumbnail', ['placeholder' => 'Body text', 'id' => 'article-ckeditor']) }}
                 <div class="" style="color : red">{{$errors->first('body')}}</div>
             </div>
         {{Form::hidden('_method', 'PUT')}}
         {!! Form::close() !!}
+        <br>
         <button class="btn btn-danger float-sm-right" data-toggle="modal" data-target="#confirm-delete">
             Delete post
         </button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -54,6 +62,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace( 'article-ckeditor' );
+</script>
 
 @endsection
 

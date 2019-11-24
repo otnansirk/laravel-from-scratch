@@ -2,6 +2,8 @@
 
 @section('content')
     <section class="jumbotron text-center  bg-white">
+        <div style="background:url(/storage/thumbnail/{{$post->thumbnail}});width:100%;height:20em;"></div>
+        <br>
         <h2 class="jumbotron-heading text-secondary">
             {{$post->title}}
         </h2>
@@ -21,4 +23,8 @@
             <a href="/posts/{{$post->id}}/edit" class="btn btn-outline-success">Edit</a>
         @endif
     @endguest
+    <br>
+    <br>
+    <br>
+    <br>
 @endsection

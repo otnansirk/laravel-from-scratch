@@ -23,7 +23,7 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
-Route::get('/services', 'PagesController@services');
+Route::get('/categories', 'PagesController@services');
 Route::get('/lang/{lang}', 'PagesController@lang');
 
 Route::resource('posts', 'PostController');

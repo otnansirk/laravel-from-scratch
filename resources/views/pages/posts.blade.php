@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('content')
-    @if(isset($posts))
+    @if(isset($posts) && count($posts) > 0)
 
         <div class="album py-5 bg-white">
             <div class="container">
@@ -31,7 +31,13 @@
             </div>
         </div>
     @else
-        <p>Not found posts</p>
+    <center>
+        <p>
+            <h2>EMPTY POSTS</h2>
+            You Can Create <a href="/posts/create">New Post</a>
+        </p><br>
+        <img src="cartoon.webp" alt="" srcset="">
+    </center>
     @endif
 
 @endsection

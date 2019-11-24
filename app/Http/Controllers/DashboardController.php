@@ -30,10 +30,10 @@ class DashboardController extends Controller
         $user = User::find($user_id);
         $data = $user->posts()->paginate(5);
 
-        foreach ($data as $item) {
-            $item->title = $post->tr($post->lang(), $item->title);
-            $item->body  = $post->tr($post->lang(), $item->body);
-        }
+        // foreach ($data as $item) {
+        //     $item->title = $post->tr($post->lang(), $item->title);
+        //     $item->body  = $post->tr($post->lang(), $item->body);
+        // }
         return view('dashboard')->with('posts', $data);
     }
 }

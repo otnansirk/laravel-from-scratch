@@ -10,7 +10,7 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/services">Services</a>
+        <a class="nav-link" href="/categories">Categories</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
@@ -20,7 +20,7 @@
       </li>
     </ul>
     <ul class="navbar-nav navbar-left">
-          <li class="nav-item dropdown mr-sm-2">
+          {{-- <li class="nav-item dropdown mr-sm-2">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                   language <span class="caret"></span>
               </a>
@@ -29,7 +29,7 @@
                   <a href="/lang/in" class="dropdown-item">Indonesia</a>
                   <a href="/lang/en" class="dropdown-item">English</a>
               </div>
-          </li>
+          </li> --}}
       @guest
           <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

@@ -42,10 +42,10 @@ class PostController extends Controller
     public function index()
     {
         $posts =  Post::paginate(5);
-        foreach ($posts as $key => $post) {
-            $post->title = $this->tr($this->lang(), $post->title);
-            $post->body  = $this->tr($this->lang(), $post->body);
-        }
+        // foreach ($posts as $key => $post) {
+        //     $post->title = $this->tr($this->lang(), $post->title);
+        //     $post->body  = $this->tr($this->lang(), $post->body);
+        // }
         return view('pages.posts')->with("posts", $posts);
     }
 
@@ -109,8 +109,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        $post->body = $this->tr($this->lang(), $post->body);
-        $post->title = $this->tr($this->lang(), $post->title);
+        // $post->body = $this->tr($this->lang(), $post->body);
+        // $post->title = $this->tr($this->lang(), $post->title);
         return view('pages.detail-post')->with('post', $post);
     }
 

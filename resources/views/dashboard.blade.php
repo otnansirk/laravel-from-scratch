@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -22,15 +22,20 @@
                   <thead>
                     <tr>
                       <th scope="col">No</th>
+                      <th scope="col">Thumnail</th>
                       <th scope="col">Title</th>
                       <th scope="col">Body priview</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($posts as $post)
+                    
+                    @foreach($posts as $key => $post)
                     <tr>
-                      <th scope="row">1</th>
+                      <th scope="row">{{ $key+1 }}</th>
+                      <td>
+                        <img class="img-thumbnail mb-3 mb-md-0" src="/storage/thumbnail/{{$post->thumbnail}}" alt="{{$post->thumbnail}}" style="width: 60px">
+                      </td>
                       <td>{{$post->title}}</td>
                       <td>{!!str_limit($post->body, $limit = 55, $end = ' ...')!!}</td>
                       <td>
@@ -60,7 +65,7 @@
                 Delete confirmation
             </div>
             <div class="modal-footer">
-                {!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'POST'])!!}
+                {!! Form::open(['action' => ['PostController@destroy', isset($post->id)?$post->id:''], 'method' => 'POST'])!!}
                     {{ Form::hidden('_method', 'DELETE')  }}
                     {{ Form::submit('Delete', ['class' => 'btn btn-danger float-sm-right', 'data-toggle' => 'modal', 'data-target' => '#confirm-delete']) }}
                 {!! Form::close() !!}

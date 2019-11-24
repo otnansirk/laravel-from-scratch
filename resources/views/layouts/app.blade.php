@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -18,6 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- ckeditor -->
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+
 </head>
 <body style = "background : white">
 
@@ -30,18 +35,9 @@
 
     <footer class="text-muted fixed-bottom">
       <div class="container">
-        <p>App &copy; k-15 2019</p>
+        <p>myPosts &copy; k15 2019</p>
       </div>
     </footer>
-
-
-         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <!-- ckeditor -->
-        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-        <script>
-            CKEDITOR.replace( 'article-ckeditor' );
-        </script>
-
         <!-- auto load modal bootstrap -->
         <script type="text/javascript">
             $(window).on('load',function(){
